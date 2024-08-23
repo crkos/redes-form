@@ -16,7 +16,7 @@ datasource db {
 model FormResponse {
   id                    Int                   @id @default(autoincrement())
   name                  String
-  email                 String
+  email                 String                @unique
   age                   Int
   phoneNumber           String
   occupation            String
