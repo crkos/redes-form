@@ -15,9 +15,17 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
     const body = await req.json();
 
-    console.log(body)
-
     const dataForm = formSchema.parse(body);
+
+    const oldUser = await prismaClient.formResponse.findUnique({
+      where: {
+        email: dataForm.email
+      }
+    })
+
+    if (oldUser) {
+      return new Response("User with this email already exists", { status: 401 });
+    }
 
     await prismaClient.formResponse.create({
       data: {

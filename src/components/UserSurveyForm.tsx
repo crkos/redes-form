@@ -61,6 +61,13 @@ export default function UserSurveyForm() {
             variant: 'destructive'
           })
           return
+        } else if (error.response?.status === 401) {
+          toast({
+            title: 'Error',
+            description: 'User with this email already exists',
+            variant: 'destructive'
+          })
+          return
         }
       }
       toast({
